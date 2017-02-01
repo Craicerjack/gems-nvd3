@@ -1,0 +1,28 @@
+{
+  "name": "gems-nvd3",
+  "homepage": "https://github.com/Craicerjack/gems-nvd3",
+  "authors": [
+    "Carlos Tighe <carlos.tighe@insight-centre.org>"
+  ],
+  "description": "test of nvd3",
+  "main": "index.html",
+  "keywords": [
+    "graph",
+    "nvd3"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "modernizr": "^3.3.1",
+    "d3": "3.5.5",
+    "nvd3": "^1.8.5"
+  }
+}
