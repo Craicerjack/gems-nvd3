@@ -95,9 +95,16 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-
-
-
+#chart {
+    height: 800px;
+    width: 1000px;
+}
+.graph {
+    margin-left: auto;
+    margin-right: auto;
+    height: 500px;
+    width: 500px;
+}
 
 
 
