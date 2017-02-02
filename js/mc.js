@@ -21,66 +21,29 @@ function formatData(data) {
 }
 
 function run(data) {
-    
-    function getMax(item) {
-        return d3.max(item.values.map(function(d){ return d.y; }));
-    }
-
-    function getMin(item) {
-        return d3.min(item.values.map(function(d){ return d.y; }));
-    }
-
+    console.log(data, " - data");
     function getEx(item) {
+        // Takes an object with an array of objects and returns the max and mins for that object
         return d3.extent(item.values.map(function(d){ return d.y; }));
     }
 
+    // ex becomes an array of arrays, ex[0] is an array with the min object
+    // ex[1] is an array with the max object so to use for our domain min = ex[0][0] and max=ex[1][1]
     var ex = d3.extent(data, getEx);
-    console.log(ex, " - ex");
-    var max = d3.max(data, getMax) + 5;
-    var min = d3.min(data, getMin) -10;
 
-    // console.log(data, " - data");
-    // var getEx = data.map(function(item) {
-    //     var min = d3.min(item.values).y;
-    //     console.log(min, " - m");
-    //     return m.y
-    // });
-
-    data[0].type = "bar";
-    data[0].yAxis = 1;
-    data[1].type = "bar";
-    data[1].yAxis = 1;
-    data[2].type = "bar";
-    data[2].yAxis = 1;
-    data[3].type = "bar";
-    data[3].yAxis = 1;
-    data[4].type = "bar";
-    data[4].yAxis = 1;
-    data[5].type = "bar";
-    data[5].yAxis = 1;
-    data[6].type = "bar";
-    data[6].yAxis = 1;
-    data[7].type = "bar";
-    data[7].yAxis = 1;
-    data[8].type = "bar";
-    data[8].yAxis = 1;
-    data[9].type = "bar";
-    data[9].yAxis = 1;
-
-
+    data.forEach(function(item) {
+        item.type = "bar";
+        item.yAxis = 1;
+    });
 
     nv.addGraph(function() {
         var chart = nv.models.multiChart()
                         .margin({top: 30, right: 60, bottom: 50, left: 70})
-                        .x(function(d) { return d.x })
-                        .y(function(d) { return d.y })
                         .color(d3.scale.category10().range())
-                        .yDomain1([ex[0][0] - 10, ex[1][1] + 5]);
+                        .yDomain1([ (ex[0][0] - 10), (ex[1][1] + 5) ]);
 
-        d3.select('#chart1 svg')
-            .datum(data)
-            .transition().duration(500).call(chart);
 
+        d3.select('#chart1 svg').datum(data).transition().duration(500).call(chart);
         return chart;
     });
 }
