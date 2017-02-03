@@ -24,19 +24,7 @@ var valueline = d3.svg.line()
  
     
 d3.json("data.json", function(data) {
-    var formattedData = [];
-    var recs = data.records;
-    var formattedRecs = recs.map(function(val, idx, arr) {
-        var isIt = formattedData.findIndex(function(item){ return item.key === val.site });
-        if (isIt > -1) {
-            formattedData[isIt].values.push({ "energy": val.energy, "date": new Date(val.date).getFullYear() });
-        } else {
-            formattedData.push({
-                key: val.site,
-                values: [{ "energy": val.energy, date: new Date(val.date).getFullYear() }]
-            });
-        }
-    });
+    var formattedData = formatData(data)
 
     var plot1 = formattedData[0];
     var ex = d3.extent(plot1.values, function(d) {
@@ -71,14 +59,5 @@ d3.json("data.json", function(data) {
         .attr("dy", "0.71em")
         .attr("text-anchor", "end")
 
-    g.selectAll("circle")
-      .data(function(d){ console.log(d, " - d");return d.values})
-      .enter()
-      .append("circle")
-      .attr("r", 2)
-      .attr("cx", function(dd){return x(dd.date)})
-      .attr("cy", function(dd){return y(dd.temperature)})
-      .attr("fill", "none")
-      .attr("stroke", "black")
 });
 
