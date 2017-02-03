@@ -1,3 +1,6 @@
+var noSeries = 0;
+var valsPerSeries = 5;
+
 var svg = d3.select('#chart1 svg');
 var margin = {top: 20, right: 80, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
@@ -44,7 +47,20 @@ function drawLine(dataSet, len) {
         .attr("cy", function(dd){return y(dd.energy)})
         .attr("fill", "black")
         .attr("stroke", "black")
+
+    localG.selectAll(".rect")
+        .data(dataSet.values)
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d) { return x(d.date); })
+        .attr("y", function(d) { return y(d.energy); })
+        .attr("width", "5px")
+        .attr("height", function(d) { return height - y(d.energy); });
+
 }
+
+
 
 d3.json("data.json", function(error, data) {
     var formattedData = formatData(data);
