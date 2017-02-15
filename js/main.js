@@ -1,59 +1,127 @@
-d3.json("/data.json", function(data) {
-    formatData(data);
-});
+var n = 4, // The number of series.
+    m = 58; // The number of values per series.
 
-function formatData(data) {
-    var testdata = [{
-        "key" : "Quantity",
-        "bar": true,
-        "values" : [ [ 1136005200000 , 1271000.0] , [ 1138683600000 , 1271000.0] , [ 1141102800000 , 1271000.0] , [ 1143781200000 , 0] , [ 1146369600000 , 0] , [ 1149048000000 , 0] , [ 1151640000000 , 0] , [ 1154318400000 , 0] , [ 1156996800000 , 0] , [ 1159588800000 , 3899486.0] , [ 1162270800000 , 3899486.0] , [ 1164862800000 , 3899486.0] , [ 1167541200000 , 3564700.0] , [ 1170219600000 , 3564700.0] , [ 1172638800000 , 3564700.0] , [ 1175313600000 , 2648493.0] , [ 1177905600000 , 2648493.0] , [ 1180584000000 , 2648493.0] , [ 1183176000000 , 2522993.0] , [ 1185854400000 , 2522993.0] , [ 1188532800000 , 2522993.0] , [ 1191124800000 , 2906501.0] , [ 1193803200000 , 2906501.0] , [ 1196398800000 , 2906501.0] , [ 1199077200000 , 2206761.0] , [ 1201755600000 , 2206761.0] , [ 1204261200000 , 2206761.0] , [ 1206936000000 , 2287726.0] , [ 1209528000000 , 2287726.0] , [ 1212206400000 , 2287726.0] , [ 1214798400000 , 2732646.0] , [ 1217476800000 , 2732646.0] , [ 1220155200000 , 2732646.0] , [ 1222747200000 , 2599196.0] , [ 1225425600000 , 2599196.0] , [ 1228021200000 , 2599196.0] , [ 1230699600000 , 1924387.0] , [ 1233378000000 , 1924387.0] , [ 1235797200000 , 1924387.0] , [ 1238472000000 , 1756311.0] , [ 1241064000000 , 1756311.0] , [ 1243742400000 , 1756311.0] , [ 1246334400000 , 1743470.0] , [ 1249012800000 , 1743470.0] , [ 1251691200000 , 1743470.0] , [ 1254283200000 , 1519010.0] , [ 1256961600000 , 1519010.0] , [ 1259557200000 , 1519010.0] , [ 1262235600000 , 1591444.0] , [ 1264914000000 , 1591444.0] , [ 1267333200000 , 1591444.0] , [ 1270008000000 , 1543784.0] , [ 1272600000000 , 1543784.0] , [ 1275278400000 , 1543784.0] , [ 1277870400000 , 1309915.0] , [ 1280548800000 , 1309915.0] , [ 1283227200000 , 1309915.0] , [ 1285819200000 , 1331875.0] , [ 1288497600000 , 1331875.0] , [ 1291093200000 , 1331875.0] , [ 1293771600000 , 1331875.0] , [ 1296450000000 , 1154695.0] , [ 1298869200000 , 1154695.0] , [ 1301544000000 , 1194025.0] , [ 1304136000000 , 1194025.0] , [ 1306814400000 , 1194025.0] , [ 1309406400000 , 1194025.0] , [ 1312084800000 , 1194025.0] , [ 1314763200000 , 1244525.0] , [ 1317355200000 , 475000.0] , [ 1320033600000 , 475000.0] , [ 1322629200000 , 475000.0] , [ 1325307600000 , 690033.0] , [ 1327986000000 , 690033.0] , [ 1330491600000 , 690033.0] , [ 1333166400000 , 514733.0] , [ 1335758400000 , 514733.0]]
-    }, {
-        "key" : "Price",
-        "values" : [ [ 1136005200000 , 71.89] , [ 1138683600000 , 75.51] , [ 1141102800000 , 68.49] , [ 1143781200000 , 62.72] , [ 1146369600000 , 70.39] , [ 1149048000000 , 59.77] , [ 1151640000000 , 57.27] , [ 1154318400000 , 67.96] , [ 1156996800000 , 67.85] , [ 1159588800000 , 76.98] , [ 1162270800000 , 81.08] , [ 1164862800000 , 91.66] , [ 1167541200000 , 84.84] , [ 1170219600000 , 85.73] , [ 1172638800000 , 84.61] , [ 1175313600000 , 92.91] , [ 1177905600000 , 99.8] , [ 1180584000000 , 121.191] , [ 1183176000000 , 122.04] , [ 1185854400000 , 131.76] , [ 1188532800000 , 138.48] , [ 1191124800000 , 153.47] , [ 1193803200000 , 189.95] , [ 1196398800000 , 182.22] , [ 1199077200000 , 198.08] , [ 1201755600000 , 135.36] , [ 1204261200000 , 125.02] , [ 1206936000000 , 143.5] , [ 1209528000000 , 173.95] , [ 1212206400000 , 188.75] , [ 1214798400000 , 167.44] , [ 1217476800000 , 158.95] , [ 1220155200000 , 169.53] , [ 1222747200000 , 113.66] , [ 1225425600000 , 107.59] , [ 1228021200000 , 92.67] , [ 1230699600000 , 85.35] , [ 1233378000000 , 90.13] , [ 1235797200000 , 89.31] , [ 1238472000000 , 105.12] , [ 1241064000000 , 125.83] , [ 1243742400000 , 135.81] , [ 1246334400000 , 142.43] , [ 1249012800000 , 163.39] , [ 1251691200000 , 168.21] , [ 1254283200000 , 185.35] , [ 1256961600000 , 188.5] , [ 1259557200000 , 199.91] , [ 1262235600000 , 210.732] , [ 1264914000000 , 192.063] , [ 1267333200000 , 204.62] , [ 1270008000000 , 235.0] , [ 1272600000000 , 261.09] , [ 1275278400000 , 256.88] , [ 1277870400000 , 251.53] , [ 1280548800000 , 257.25] , [ 1283227200000 , 243.1] , [ 1285819200000 , 283.75] , [ 1288497600000 , 300.98] , [ 1291093200000 , 311.15] , [ 1293771600000 , 322.56] , [ 1296450000000 , 339.32] , [ 1298869200000 , 353.21] , [ 1301544000000 , 348.5075] , [ 1304136000000 , 350.13] , [ 1306814400000 , 347.83] , [ 1309406400000 , 335.67] , [ 1312084800000 , 390.48] , [ 1314763200000 , 384.83] , [ 1317355200000 , 381.32] , [ 1320033600000 , 404.78] , [ 1322629200000 , 382.2] , [ 1325307600000 , 405.0] , [ 1327986000000 , 456.48] , [ 1330491600000 , 542.44] , [ 1333166400000 , 599.55] , [ 1335758400000 , 583.98]]
-    }];
-    var values = data.sites.map(function(item) {
-        return [ item.site, item.area.total ];
-    });
-    var xAx = {
-        "key": "Site",
-        "bar": true,
-        "values": values
-    }
-    testdata[0] = xAx;
-    drawGraph(testdata);
+// The xz array has m elements, representing the x-values shared by all series.
+// The yz array has n elements, representing the y-values of each of the n series.
+// Each yz[i] is an array of m non-negative numbers representing a y-value for xz[i].
+// The y01z array has the same structure as yz, but with stacked [y₀, y₁] instead of y.
+var xz = d3.range(m),
+    yz = d3.range(n).map(function() { return bumps(m); }),
+    y01z = d3.stack().keys(d3.range(n))(d3.transpose(yz)),
+    yMax = d3.max(yz, function(y) { return d3.max(y); }),
+    y1Max = d3.max(y01z, function(y) { return d3.max(y, function(d) { return d[1]; }); });
+
+var svg = d3.select("svg"),
+    margin = {top: 40, right: 10, bottom: 20, left: 10},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var x = d3.scaleBand()
+    .domain(xz)
+    .rangeRound([0, width])
+    .padding(0.08);
+
+var y = d3.scaleLinear()
+    .domain([0, y1Max])
+    .range([height, 0]);
+
+var color = d3.scaleOrdinal()
+    .domain(d3.range(n))
+    .range(d3.schemeCategory20c);
+
+var series = g.selectAll(".series")
+  .data(y01z)
+  .enter().append("g")
+    .attr("fill", function(d, i) { return color(i); });
+
+var rect = series.selectAll("rect")
+  .data(function(d) { return d; })
+  .enter().append("rect")
+    .attr("x", function(d, i) { return x(i); })
+    .attr("y", height)
+    .attr("width", x.bandwidth())
+    .attr("height", 0);
+
+rect.transition()
+    .delay(function(d, i) { return i * 10; })
+    .attr("y", function(d) { return y(d[1]); })
+    .attr("height", function(d) { return y(d[0]) - y(d[1]); });
+
+g.append("g")
+    .attr("class", "axis axis--x")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x)
+        .tickSize(0)
+        .tickPadding(6));
+
+d3.selectAll("input")
+    .on("change", changed);
+
+var timeout = d3.timeout(function() {
+  d3.select("input[value=\"grouped\"]")
+      .property("checked", true)
+      .dispatch("change");
+}, 2000);
+
+function changed() {
+  timeout.stop();
+  if (this.value === "grouped") transitionGrouped();
+  else transitionStacked();
 }
 
-function drawGraph(data) {
+function transitionGrouped() {
+  y.domain([0, yMax]);
 
-    nv.addGraph(function() {
-        var chart = nv.models.linePlusBarChart()
-                      .margin({top: 30, right: 60, bottom: 50, left: 70})
-                      .x(function(d,i) { return i })
-                      .y(function(d) { return d[1] })
-                      .color(d3.scale.category10().range());
+  rect.transition()
+      .duration(500)
+      .delay(function(d, i) { return i * 10; })
+      .attr("x", function(d, i) { return x(i) + x.bandwidth() / n * this.parentNode.__data__.key; })
+      .attr("width", x.bandwidth() / n)
+    .transition()
+      .attr("y", function(d) { return y(d[1] - d[0]); })
+      .attr("height", function(d) { return y(0) - y(d[1] - d[0]); });
+}
 
-        chart.xAxis
-            .showMaxMin(false)
-            .tickFormat(function(d) {
-                var i = d/10;
-                console.log(data[0].values[i], " - data[0].values[i]");
-                var dx = data[0].values[i][0] || 0;
-                return dx;
-            });
+function transitionStacked() {
+  y.domain([0, y1Max]);
 
-        chart.y1Axis.tickFormat(d3.format(',f'));
+  rect.transition()
+      .duration(500)
+      .delay(function(d, i) { return i * 10; })
+      .attr("y", function(d) { return y(d[1]); })
+      .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+    .transition()
+      .attr("x", function(d, i) { return x(i); })
+      .attr("width", x.bandwidth());
+}
 
-        chart.y2Axis.tickFormat(function(d) { return '$' + d3.format(',f')(d) });
+// Returns an array of m psuedorandom, smoothly-varying non-negative numbers.
+// Inspired by Lee Byron’s test data generator.
+// http://leebyron.com/streamgraph/
+function bumps(m) {
+  var values = [], i, j, w, x, y, z;
 
-        chart.bars.forceY([0]);
+  // Initialize with uniform random values in [0.1, 0.2).
+  for (i = 0; i < m; ++i) {
+    values[i] = 0.1 + 0.1 * Math.random();
+  }
 
-        d3.select('#chart svg')
-          .datum(data)
-          .transition().duration(500)
-          .call(chart);
+  // Add five random bumps.
+  for (j = 0; j < 5; ++j) {
+    x = 1 / (0.1 + Math.random());
+    y = 2 * Math.random() - 0.5;
+    z = 10 / (0.1 + Math.random());
+    for (i = 0; i < m; i++) {
+      w = (i / m - y) * z;
+      values[i] += x * Math.exp(-w * w);
+    }
+  }
 
-        nv.utils.windowResize(chart.update);
+  // Ensure all values are positive.
+  for (i = 0; i < m; ++i) {
+    values[i] = Math.max(0, values[i]);
+  }
 
-        return chart;
-    });
+  return values;
 }
