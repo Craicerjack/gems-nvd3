@@ -1,6 +1,16 @@
 var noSeries = 0;
 var valsPerSeries = 5;
 
+// The xz array has m elements, representing the x-values shared by all series.
+// The yz array has n elements, representing the y-values of each of the n series.
+// Each yz[i] is an array of m non-negative numbers representing a y-value for xz[i].
+// The y01z array has the same structure as yz, but with stacked [y₀, y₁] instead of y.
+var xz = d3.range(m),
+    yz = d3.range(n).map(function(m) { return bumps(m); }),
+    y01z = d3.stack().keys(d3.range(n))(d3.transpose(yz)),
+    yMax = d3.max(yz, function(y) { return d3.max(y); }),
+    y1Max = d3.max(y01z, function(y) { return d3.max(y, function(d) { return d[1]; }); });
+
 var svg = d3.select('#chart1 svg');
 var margin = {top: 20, right: 80, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
