@@ -41,7 +41,7 @@ var rect = series.selectAll("rect")
     .attr("x", function(d, i) { return x(i); })
     .attr("y", height)
     .attr("width", x.bandwidth())
-    .attr("height", 0);
+    .attr("height", 10);
 
 rect.transition()
     .delay(function(d, i) { return i * 10; })
